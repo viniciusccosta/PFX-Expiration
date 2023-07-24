@@ -7,7 +7,7 @@ PFX Expiration é um projeto open source, cujo propósito é exibir informaçõe
 
 ## Instalação
 
-Para instalar o ClipBarcode, siga as etapas abaixo:
+Para instalar o PFX Expiration, siga as etapas abaixo:
 
 1. Baixe o arquivo de Instalação: [pfx-expiration_v.0.1.0_win64.exe](https://github.com/viniciusccosta/PFX-Expiration/releases/download/v0.1.0/pfx-expiration_v0.1.0_win64.exe)
 2. Execute o instalador como Administrador e siga as instruções fornecidas.
