@@ -2,6 +2,9 @@ import subprocess
 import chardet
 import re
 
+import tkinter       as tk
+
+from tkinter         import ttk
 from dataclasses     import dataclass
 from tabulate        import tabulate
 from dateutil.parser import parse
@@ -38,16 +41,81 @@ class Certificado:
         return cls.verbose_names.get(field, field.capitalize())
     
     # ----------------------------------------------------------------
-    def to_tabula(self, *args) -> tuple:
+    def get_values_by_fieldname(self, *args) -> tuple:
         result = []
         
         for h in args:
-            result.append( getattr(self, h, None) )
+            value = getattr(self, h, None)
+            if isinstance(value, datetime):
+                value = value.strftime("%d/%m/%Y %H:%M:%S")
+            result.append(value)
         
         return result
     
     def __str__(self):
         return f'{self.nome}({self.cpf_cnpj}) - {self.hash}'
+
+# ==================================================================
+class App():
+    def __init__(self, certificados, *args, **kwargs):
+        self.root = tk.Tk()
+        self.root.title('PFX Expiration')
+        self._center_window()
+        
+        # -------------------------------------------------------------------------
+        fields      = [ 'hash', 'nome', 'cpf_cnpj', 'data_criacao', 'dias_para_expirar' ]
+        data        = [c.get_values_by_fieldname(*fields) for c in certificados]
+        data_sorted = sorted(data, key=lambda x: x[-1])
+        
+        # -------------------------------------------------------------------------
+        frame = ttk.Frame(self.root)
+        frame.pack(expand=True, fill='both')
+        
+        scroll_y = ttk.Scrollbar(frame)
+        scroll_y.pack(side=tk.RIGHT, fill='y')
+        
+        scroll_x = ttk.Scrollbar(frame, orient='horizontal')
+        scroll_x.pack(side=tk.BOTTOM, fill='x')
+        
+        self.table = ttk.Treeview(frame, yscrollcommand=scroll_y.set, xscrollcommand=scroll_x.set)
+        self.table.pack(expand=True, fill='both')
+        
+        scroll_y.config(command=self.table.yview)
+        scroll_x.config(command=self.table.xview)
+        
+        # -------------------------------------------------------------------------
+        self.table['columns'] = fields
+        
+        self.table.heading("#0",text="", anchor=tk.CENTER)
+        self.table.column('#0', width=0, stretch=tk.NO)
+        
+        for f in fields:
+            self.table.heading(f, text=Certificado.get_verbose_name(f), anchor=tk.CENTER)
+            self.table.column(f, anchor=tk.CENTER, stretch=tk.YES)
+
+        for i,d in enumerate(data_sorted):
+            self.table.insert(
+                parent  = "", 
+                iid     = i,
+                index   = "end", 
+                text    = "", 
+                values  = d
+        )        
+    
+    def _center_window(self):       
+        width         = 1000
+        height        = 500
+        
+        screen_width  = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        
+        x_cordinate   = int((screen_width / 2) - (width / 2))
+        y_cordinate   = int((screen_height / 2) - (height / 2))
+
+        self.root.geometry("{}x{}+{}+{}".format(width, height, x_cordinate, y_cordinate))
+        
+    def run(self, *args, **kwargs):
+        self.root.mainloop()
 
 # ==================================================================
 def format_cpf_cnpj(value:str) -> str:
@@ -108,7 +176,7 @@ def get_certificados() -> list[Certificado]:
 def imprimir_resultado(certificados: list[Certificado]) -> None:
     fields      = [ 'nome', 'cpf_cnpj', 'data_criacao', 'dias_para_expirar' ]
     headers     = [Certificado.get_verbose_name(f) for f in fields]
-    data        = [c.to_tabula(*fields) for c in certificados]
+    data        = [c.get_values_by_fieldname(*fields) for c in certificados]
     data_sorted = sorted(data, key=lambda x: x[-1])
     
     table = tabulate(
@@ -122,4 +190,8 @@ def imprimir_resultado(certificados: list[Certificado]) -> None:
 # ================================================================== 
 if __name__ == "__main__":
     certificados = get_certificados()
-    imprimir_resultado(certificados)
+    # imprimir_resultado(certificados)
+    
+    app = App(certificados)
+    app.run()
+    
