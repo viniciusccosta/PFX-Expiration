@@ -1,8 +1,8 @@
-from dataclasses import dataclass
 import subprocess
 import chardet
 import re
 
+from dataclasses     import dataclass
 from tabulate        import tabulate
 from dateutil.parser import parse
 from datetime        import datetime
@@ -107,9 +107,9 @@ def get_certificados() -> list[Certificado]:
         
 def imprimir_resultado(certificados: list[Certificado]) -> None:
     fields      = [ 'nome', 'cpf_cnpj', 'data_criacao', 'dias_para_expirar' ]
-    headers     = [Certificado.get_verbose_name(f) for f in fields],
-    data        = sorted([ c.to_tabula(*fields) for c in certificados ], key=lambda x: x[-1]),
-    data_sorted = sorted(data, key=lambda x: x[-1]),
+    headers     = [Certificado.get_verbose_name(f) for f in fields]
+    data        = [c.to_tabula(*fields) for c in certificados]
+    data_sorted = sorted(data, key=lambda x: x[-1])
     
     table = tabulate(
         tabular_data = data_sorted,
