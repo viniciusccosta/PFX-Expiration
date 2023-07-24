@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pfx-expiration"
 version = "0.1.0"
-description = "Printa informações sobre certificados digitais instalados na máquina."
+description = "Exibe informações sobre a validade dos certificados digitais instalados na máquina."
 authors = ["Vinícius Costa <viniciusccosta95@gmail.com>"]
 license = "MIT"
 readme = "README.md"
@@ -13,6 +13,9 @@ tabulate = "^0.9.0"
 python-dateutil = "^2.8.2"
 chardet = "^5.1.0"
 
+
+[tool.poetry.group.dev.dependencies]
+pyinstaller = {version = "^5.13.0", python = ">=3.11, <3.13"}
 
 [build-system]
 requires = ["poetry-core"]
