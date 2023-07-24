@@ -60,6 +60,7 @@ class App():
     def __init__(self, certificados, *args, **kwargs):
         self.root = tk.Tk()
         self.root.title('PFX Expiration')
+        self.root.iconbitmap("icon.ico")
         self._center_window()
         
         # -------------------------------------------------------------------------
