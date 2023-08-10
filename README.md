@@ -25,6 +25,6 @@ O PFX Expiration é um projeto open source e recebe contribuições da comunidad
 
 Este projeto é licenciado sob a Licença MIT. Consulte o arquivo LICENSE para obter mais detalhes.
 
-## Atribuições
+## Créditos
 
-[Ícone](https://www.flaticon.com/free-icon/pfx_9749009?term=pfx&page=1&position=1&origin=search&related_id=9749009)
+Ícone criado por [shohanur.rahman13](https://www.flaticon.com/free-icon/pfx_9749009?term=pfx&page=1&position=1&origin=search&related_id=9749009)
