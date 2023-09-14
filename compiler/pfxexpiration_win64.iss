@@ -1,7 +1,7 @@
 #define MyAppName "PFX Expiration"
-#define MyAppVersion "0.1.0"
-#define MyOutputBaseFilename "pfx-expiration_v0.1.0_win64"
-#define MyAppPublisher "Vinícius Costa"
+#define MyAppVersion "0.1.1"
+#define MyOutputBaseFilename "pfx-expiration_v0.1.1_win64"
+#define MyAppPublisher "VinÃ­cius Costa"
 #define MyAppURL "https://github.com/viniciusccosta"
 #define MyAppExeName "PFX Expiration.exe"
 
