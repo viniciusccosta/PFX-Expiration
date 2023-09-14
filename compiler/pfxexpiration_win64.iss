@@ -1,14 +1,13 @@
 #define MyAppName "PFX Expiration"
-#define MyAppVersion "0.1.1"
-#define MyOutputBaseFilename "pfx-expiration_v0.1.1_win64"
-#define MyAppPublisher "VinÃ­cius Costa"
+#define MyAppVersion "0.2.0"
+#define MyOutputBaseFilename "pfx-expiration_v0.2.0_win64"
+#define MyAppPublisher "Vinícius Costa"
 #define MyAppURL "https://github.com/viniciusccosta"
 #define MyAppExeName "PFX Expiration.exe"
+#define MyAppId GetEnv('PFX_EXPIRATION_ID')
 
 [Setup]
-; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
-; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{A7C41DF5-143F-483C-886E-9F176F04FECE}
+AppId={{#MyAppId}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
@@ -18,8 +17,6 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 LicenseFile=C:\Users\vinic\VSCodeProjects\PFX-Expiration\LICENSE.md
-; Uncomment the following line to run in non administrative install mode (install for current user only.)
-;PrivilegesRequired=lowest
 OutputDir=C:\Users\vinic\VSCodeProjects\PFX-Expiration\compiler
 OutputBaseFilename={#MyOutputBaseFilename}
 SetupIconFile=C:\Users\vinic\VSCodeProjects\PFX-Expiration\icon.ico
@@ -36,7 +33,6 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "C:\Users\vinic\VSCodeProjects\PFX-Expiration\dist\app\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\vinic\VSCodeProjects\PFX-Expiration\dist\app\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
