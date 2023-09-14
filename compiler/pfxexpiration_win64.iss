@@ -1,6 +1,6 @@
 #define MyAppName "PFX Expiration"
-#define MyAppVersion "0.2.0"
-#define MyOutputBaseFilename "pfx-expiration_v0.2.0_win64"
+#define MyAppVersion "0.2.1"
+#define MyOutputBaseFilename "pfx-expiration_v0.2.1_win64"
 #define MyAppPublisher "Vinícius Costa"
 #define MyAppURL "https://github.com/viniciusccosta"
 #define MyAppExeName "PFX Expiration.exe"
@@ -23,6 +23,8 @@ SetupIconFile=C:\Users\vinic\VSCodeProjects\PFX-Expiration\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
+UninstallDisplayName={#MyAppName}
+UninstallDisplayIcon={app}\icon.ico
 
 [Languages]
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
@@ -41,5 +43,6 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
-[Setup]
-UninstallDisplayIcon={app}\{#MyAppExeName}
+[Messages]
+SetupAppTitle    = {#MyAppName} {#MyAppVersion}
+SetupWindowTitle = {#MyAppName} {#MyAppVersion}
