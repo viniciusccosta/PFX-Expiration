@@ -153,12 +153,16 @@ def get_certificados() -> list[Certificado]:
         cert = teste[s_ind:e_ind]
 
         # -----------------------------------------------------------
-        numero_serie  = cert[1].split('Número de Série:')[-1].strip()
-        hash_cert     = cert[7].split('Hash Cert(sha1):')[-1].strip()
-        notbefore     = cert[3].split('NotBefore:')[-1].strip()
-        notafter      = cert[4].split('NotAfter:')[-1].strip()
-        requerente    = cert[5].split(',')[0].strip()
-        nome,cpf_cnpj = requerente[15:].split(':')
+        try:
+            numero_serie  = cert[1].split('Número de Série:')[-1].strip()
+            hash_cert     = cert[7].split('Hash Cert(sha1):')[-1].strip()
+            notbefore     = cert[3].split('NotBefore:')[-1].strip()
+            notafter      = cert[4].split('NotAfter:')[-1].strip()
+            requerente    = cert[5].split(',')[0].strip()
+            nome,cpf_cnpj = requerente[15:].split(':')
+        except Exception as e:
+            print(i, cert, e)
+            continue
 
         # -----------------------------------------------------------
         certificado = Certificado(
@@ -195,4 +199,3 @@ if __name__ == "__main__":
     
     app = App(certificados)
     app.run()
-    
