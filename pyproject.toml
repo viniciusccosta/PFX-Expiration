@@ -1,6 +1,6 @@
 [project]
 name = "pfx-expiration"
-version = "0.1.0"
+version = "0.1.1"
 description = "Exibe informações sobre a validade dos certificados digitais instalados na máquina."
 authors = [{ name = "Vinícius Costa", email = "viniciusccosta95@gmail.com" }]
 license = "MIT"
